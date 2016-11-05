@@ -10,6 +10,11 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+/**
+ * ./bin/hadoop jar /tmp/com.finskul.hadoop-1.0-SNAPSHOT.jar distcache.MapJoinMR /user/jpvel/finskul/dcinput.txt /user/jpvel/finskul/mapjoin-mr-out
+ * @author jpvel
+ *
+ */
 public class MapJoinMR {
 	
 	

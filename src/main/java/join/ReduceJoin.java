@@ -14,6 +14,8 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 /**
+ * ./bin/hadoop jar /tmp/com.finskul.hadoop-1.0-SNAPSHOT.jar join.ReduceJoin
+ * 
  * Test shell script
  * grep /home/jpvel/workspace/edureka/com.finskul.hadoop/src/main/resources/dev/txns -e "4000001" | cut -d',' -f4>/tmp/floatval.txt
  * @author jpvel
