@@ -10,7 +10,7 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-public class MyDC {
+public class MapJoinMR {
 	
 	
 	
@@ -20,7 +20,7 @@ public class MyDC {
                   throws IOException, ClassNotFoundException, InterruptedException {
     
     Job job = new Job();
-    job.setJarByClass(MyDC.class);
+    job.setJarByClass(MapJoinMR.class);
     job.setJobName("DCTest");
     job.setNumReduceTasks(0);
     
