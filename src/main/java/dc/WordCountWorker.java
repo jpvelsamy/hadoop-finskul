@@ -24,6 +24,7 @@ public class WordCountWorker implements Callable<Map<String, Integer>> {
 		{
 		
 				String incomingToken = incomingTokens[i];
+				//the algorithm
 				if(this.wordCount.containsKey(incomingToken))
 				{
 					Integer presentValue = this.wordCount.get(incomingToken);

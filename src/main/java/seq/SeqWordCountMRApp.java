@@ -14,6 +14,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+/**
+ * ./bin/hadoop jar /tmp/com.finskul.hadoop-1.0-SNAPSHOT.jar seq.SeqWordCountMRApp
+ * @author jpvel
+ *
+ */
 public class SeqWordCountMRApp extends Configured implements Tool{
 
 	
