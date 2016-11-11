@@ -85,11 +85,11 @@ public class HdfsClient {
 		writeFile(destPath, fileName);
 	}
 	
-	public static void writeWhiteGoodsCsv() throws ErrorSummary
+	public static void writeWhiteGoodsCsv(String folderPath) throws ErrorSummary
 	{
-		String destPath = "/user/jpvel/whitegoods/lg.csv";
+		
 		String fileName = "lg.csv";
-		writeFile(destPath, fileName);
+		writeFile(folderPath, fileName);
 	}
 	
 	public static void writeFile(String destPath, String fileName) throws ErrorSummary {

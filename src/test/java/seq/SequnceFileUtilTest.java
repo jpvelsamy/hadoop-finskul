@@ -19,7 +19,8 @@ public class SequnceFileUtilTest extends TestCase {
 		try {
 			SequenceFileUtil.writeHDFS();;
 		} catch (ErrorSummary e) {
-			fail(ErrorSummary.stackTrace(e));
+			e.printStackTrace();
+			fail(e.getMessage());
 		}
 	}
 }

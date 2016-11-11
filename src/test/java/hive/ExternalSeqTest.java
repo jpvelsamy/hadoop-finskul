@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import finskul.ErrorSummary;
 
-public class HiveUtilTest {
+public class ExternalSeqTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -19,18 +19,20 @@ public class HiveUtilTest {
 	}
 
 	@Test
-	public void testConnection() {
+	public void testHiveSeqFile() 
+	{
 		try {
-			HiveUtil.getConnection();
+			ExternalSeqTable.writeAsSeq();
 		} catch (ErrorSummary e) {
-			fail(ErrorSummary.stackTrace(e));
+			e.printStackTrace();
+			fail(e.getMessage());
 		}
 	}
 	
 	@Test
 	public void testCreateDatabase() {
 		try {
-			HiveUtil.createDatabase();;
+			ExternalSeqTable.createDatabase();;
 		} catch (ErrorSummary e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -41,7 +43,7 @@ public class HiveUtilTest {
 	public void testCreatExternalTable()
 	{
 		try {
-			HiveUtil.createExternalTable();
+			ExternalSeqTable.createExternalTable();
 		} catch (ErrorSummary e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -52,7 +54,7 @@ public class HiveUtilTest {
 	public void testCount()
 	{
 		try {
-			HiveUtil.doCount();
+			ExternalSeqTable.doCount();
 		} catch (ErrorSummary e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -63,11 +65,11 @@ public class HiveUtilTest {
 	public void testCleanup()
 	{
 		try {
-			HiveUtil.cleanUp();;
+			ExternalSeqTable.cleanUp();;
 		} catch (ErrorSummary e) {
 			e.printStackTrace();
 			fail(e.getMessage());
 		}
 	}
-	
+
 }

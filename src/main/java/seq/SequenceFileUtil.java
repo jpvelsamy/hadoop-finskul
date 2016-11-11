@@ -42,7 +42,7 @@ public class SequenceFileUtil {
         
 	}
 	
-	private static String readFileToString(String inputFileName) throws ErrorSummary
+	public static String readFileToString(String inputFileName) throws ErrorSummary
 	{
 		BufferedReader reader=null;
         FileReader fReader =null;
