@@ -23,7 +23,7 @@ public class SeqWordMapper extends Mapper<Text, Text, Text, IntWritable>
 	        {
 	        	word.set(incomingWord);		
 	        	context.write(word, one);
-	        	context.getCounter("files", fileName.toString()).increment(1);;
+	        	context.getCounter("files", fileName.toString()).increment(1);
 	        }
 	      }
 		

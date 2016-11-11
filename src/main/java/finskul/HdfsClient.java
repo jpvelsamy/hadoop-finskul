@@ -71,7 +71,7 @@ public class HdfsClient {
 		String fileName ="custs";
 		writeFile(destPath, fileName);
 		destPath = "/user/jpvel/finskul/txns.txt";
-		fileName ="dcinput";
+		fileName ="txns";
 		writeFile(destPath, fileName);
 	}
 	
@@ -82,6 +82,13 @@ public class HdfsClient {
 		writeFile(destPath, fileName);
 		destPath = "/user/jpvel/finskul/dcinput.txt";
 		fileName ="dcinput";
+		writeFile(destPath, fileName);
+	}
+	
+	public static void writeWhiteGoodsCsv() throws ErrorSummary
+	{
+		String destPath = "/user/jpvel/whitegoods/lg.csv";
+		String fileName = "lg.csv";
 		writeFile(destPath, fileName);
 	}
 	
@@ -119,7 +126,16 @@ public class HdfsClient {
 		}
 	}
 	
-	
+	public static void deleteFolder(String folderPath) throws ErrorSummary
+	{
+		FileSystem fileSystem = getFS();		
+		Path path = new Path(folderPath);
+		try {
+			fileSystem.delete(path, true);
+		} catch (IOException e) {
+			throw new ErrorSummary(e);
+		}
+	}
 
 	public static FileSystem getFS() throws ErrorSummary {
 		Configuration conf = getConfig();
@@ -137,8 +153,8 @@ public class HdfsClient {
 		Configuration conf = new Configuration();
 		conf.set("fs.default.name", hdfsPath);
 		// If you dont configure this then you will be using the defaults
-		conf.set("dfs.replication", "3");
-		conf.set("dfs.blocksize", "4K");
+		/*conf.set("dfs.replication", "3");
+		conf.set("dfs.blocksize", "4K");*/
 		return conf;
 	}
 

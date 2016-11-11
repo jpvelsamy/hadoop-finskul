@@ -50,7 +50,7 @@ public int run(String[] args) throws Exception
 	    job.setMapperClass(SensorMapper.class);
 	    job.setMapOutputKeyClass(Text.class);
 	    job.setMapOutputValueClass(Text.class);
-	    job.setInputFormatClass(SensorInputFormat.class);
+	    job.setInputFormatClass(SensorInputFormat.class);//Explicitly mention the different input format
 	    FileInputFormat.addInputPath(job, new Path("/user/jpvel/finskul/sensor.txt"));
 	    FileOutputFormat.setOutputPath(job, new Path("/user/jpvel/finskul/custominput-mr-out"));
 	    System.exit(job.waitForCompletion(true) ? 0 : 1);

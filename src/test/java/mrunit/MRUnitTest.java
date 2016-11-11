@@ -28,6 +28,7 @@ public class MRUnitTest {
 	public void setUp() {
 		WordCountMapper mapper = new WordCountMapper();
 		WordCountReducer reducer = new WordCountReducer();
+		
 		mapDriver = MapDriver.newMapDriver(mapper);
 		reduceDriver = ReduceDriver.newReduceDriver(reducer);
 		mapReduceDriver = MapReduceDriver.newMapReduceDriver(mapper, reducer);
@@ -36,8 +37,10 @@ public class MRUnitTest {
 	@Test
 	public void testMap() {
 		System.out.println("hello" + mapDriver);
+		//INPUT
 		mapDriver.withInput(new Text("Somestuff"),
 				new Text("Hello Hello world"));
+		//OUTPUT
 		mapDriver.withOutput(new Text("Hello"), new IntWritable(1));
 		mapDriver.withOutput(new Text("Hello"), new IntWritable(1));
 		mapDriver.withOutput(new Text("world"), new IntWritable(1));
