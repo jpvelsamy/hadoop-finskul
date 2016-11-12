@@ -26,4 +26,14 @@ public class BasicTest {
 		}
 	}
 
+	@Test
+	public void testCreateDatabase() {
+		try {
+			Util.createDatabase();;
+		} catch (ErrorSummary e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}
+	
 }

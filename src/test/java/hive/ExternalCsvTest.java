@@ -20,15 +20,7 @@ public class ExternalCsvTest {
 
 	
 	
-	@Test
-	public void testCreateDatabase() {
-		try {
-			ExternalCsvTable.createDatabase();;
-		} catch (ErrorSummary e) {
-			e.printStackTrace();
-			fail(e.getMessage());
-		}
-	}
+	
 	
 	@Test
 	public void testCreatExternalTable()
@@ -46,6 +38,17 @@ public class ExternalCsvTest {
 	{
 		try {
 			ExternalCsvTable.doCount();
+		} catch (ErrorSummary e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCreateTableWithPartition() 
+	{
+		try {
+			ExternalCsvTable.createExternalTableWithPartition();
 		} catch (ErrorSummary e) {
 			e.printStackTrace();
 			fail(e.getMessage());

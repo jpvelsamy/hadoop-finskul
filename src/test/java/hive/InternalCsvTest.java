@@ -23,15 +23,7 @@ public class InternalCsvTest {
 		fail("Not yet implemented");
 	}
 
-	@Test
-		public void testCreateDatabase() {
-			try {
-				InternalManagedCsvTable.createDatabase();;
-			} catch (ErrorSummary e) {
-				e.printStackTrace();
-				fail(e.getMessage());
-			}
-		}
+	
 		
 		@Test
 		public void testCreateInternalTable()
@@ -56,6 +48,17 @@ public class InternalCsvTest {
 		}
 		
 		@Test
+		public void testLoadTotalData()
+		{
+			try {
+				InternalManagedCsvTable.createTotalTable();
+			} catch (ErrorSummary e) {
+				e.printStackTrace();
+				fail(e.getMessage());
+			}
+		}
+		
+		@Test
 		public void testCleanup()
 		{
 			try {
@@ -66,4 +69,5 @@ public class InternalCsvTest {
 			}
 		}
 
+		
 }

@@ -29,15 +29,7 @@ public class ExternalSeqTest {
 		}
 	}
 	
-	@Test
-	public void testCreateDatabase() {
-		try {
-			ExternalSeqTable.createDatabase();;
-		} catch (ErrorSummary e) {
-			e.printStackTrace();
-			fail(e.getMessage());
-		}
-	}
+	
 	
 	@Test
 	public void testCreatExternalTable()

@@ -5,17 +5,11 @@ import finskul.HdfsClient;
 
 public class InternalManagedCsvTable {
 
-	public static void createDatabase() throws ErrorSummary
-	{
-		String createDatabase = "CREATE DATABASE FINSKUL";
-		Util.executeStatement(createDatabase);
-	}
-	
 	public static void createTable() throws ErrorSummary
 	{
 		String destPath = "/user/jpvel/managed/whitegoods/lg.csv";
 		HdfsClient.writeWhiteGoodsCsv(destPath);
-		String createExtTable = "CREATE EXTERNAL TABLE FINSKUL.MG_WHITEGOODS"+
+		String createTable = "CREATE TABLE FINSKUL.MG_WHITEGOODS"+
 													"(PRODUCT STRING,"+
 													"MODEL STRING,"+
 													"CATEGORY STRING,"+
@@ -25,7 +19,7 @@ public class InternalManagedCsvTable {
 													"ROW FORMAT DELIMITED FIELDS TERMINATED BY ','"+
 													"LOCATION '/user/jpvel/managed/whitegoods'";
 	
-		Util.executeStatement(createExtTable);
+		Util.executeStatement(createTable);
 	}
 
 	public static void doCount() throws ErrorSummary {
@@ -36,11 +30,34 @@ public class InternalManagedCsvTable {
 	
 	public static void cleanUp() throws ErrorSummary
 	{
-		String drop="DROP TABLE MG_WHITEGOODS";
+		String drop="DROP TABLE FINSKUL.MG_WHITEGOODS";
 		Util.executeStatement(drop);
-		String db="DROP DATBASE FINSKUL";
-		Util.executeStatement(db);
+		
+		drop="DROP TABLE FINSKUL.WHITEGOODS_load";
+		Util.executeStatement(drop);
+		
+		drop="DROP TABLE FINSKUL.MG_WHITEGOODS_TOTAL";
+		Util.executeStatement(drop);
+		
 		HdfsClient.deleteFolder("/user/jpvel/managed/whitegoods");
+	}
+	
+	public static void createTotalTable() throws ErrorSummary
+	{
+		String destPath = "/user/jpvel/managed/whitegoods/totaldata.csv";
+		HdfsClient.writeTotalGoodsCsv(destPath);
+		String createTable = "CREATE TABLE FINSKUL.MG_WHITEGOODS_TOTAL"+
+													"(PRODUCT STRING,"+
+													"MODEL STRING,"+
+													"CATEGORY STRING,"+
+													"DP DOUBLE,"+
+													"MRP DOUBLE,"+
+													"WHP DOUBLE,"
+													+ "MFG STRING) "+
+													"ROW FORMAT DELIMITED FIELDS TERMINATED BY ','"+
+													"LOCATION '/user/jpvel/managed/whitegoods'";
+	
+		Util.executeStatement(createTable);
 	}
 
 }

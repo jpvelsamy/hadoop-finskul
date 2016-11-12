@@ -5,12 +5,6 @@ import finskul.HdfsClient;
 
 public class ExternalCsvTable {
 	
-	public static void createDatabase() throws ErrorSummary
-	{
-		String createDatabase = "CREATE DATABASE FINSKUL";
-		Util.executeStatement(createDatabase);
-	}
-
 	public static void createExternalTable() throws ErrorSummary
 	{
 		String destPath = "/user/jpvel/whitegoods/lg.csv";
@@ -40,9 +34,40 @@ public class ExternalCsvTable {
 		String drop="DROP TABLE FINSKUL.WHITEGOODS";
 		Util.executeStatement(drop);
 		
-		String db="DROP DATABASE FINSKUL";
-		Util.executeStatement(db);
+		drop="DROP TABLE FINSKUL.WHITEGOODS_WITH_PARTN";
+		Util.executeStatement(drop);
+		
 		HdfsClient.deleteFolder("/user/jpvel/whitegoods");
+	}
+
+	public static void createExternalTableWithPartition() throws ErrorSummary
+	{
+		String destPath = "/user/jpvel/whitegoods/LG/lg_part.csv";
+		HdfsClient.writeWhiteGoodsCsv(destPath);
+		destPath = "/user/jpvel/whitegoods/SAMSUNG/samsung_part.csv";
+		HdfsClient.writeWhiteGoodsCsv(destPath);
+		
+		String createExtTable = "CREATE EXTERNAL TABLE FINSKUL.WHITEGOODS_WITH_PARTN"+
+													"(PRODUCT STRING,"+
+													"MODEL STRING,"+
+													"CATEGORY STRING,"+
+													"DP DOUBLE,"+
+													"MRP DOUBLE,"+
+													"WHP DOUBLE) "+
+													"PARTITIONED BY (MFG STRING) "+
+													"ROW FORMAT DELIMITED FIELDS TERMINATED BY ','"+
+													"LOCATION '/user/jpvel/whitegoods/'";
+		
+		Util.executeStatement(createExtTable);
+		
+		String partition1 = "ALTER TABLE FINSKUL.WHITEGOODS_WITH_PARTN ADD PARTITION (MFG='LG')"+ 
+				"location '/user/jpvel/whitegoods/LG'";
+		Util.executeStatement(partition1);
+		
+		String partition2 = "ALTER TABLE FINSKUL.WHITEGOODS_WITH_PARTN ADD PARTITION (MFG='SAMSUNG')"+ 
+				"location '/user/jpvel/whitegoods/SAMSUNG'";
+		Util.executeStatement(partition2);
+		
 	}
 	
 	

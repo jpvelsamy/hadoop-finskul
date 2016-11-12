@@ -69,13 +69,7 @@ public class ExternalSeqTable {
     	
 	}
 
-	public static void createDatabase() throws ErrorSummary
-		{
-			String createDatabase = "CREATE DATABASE FINSKUL";
-			Util.executeStatement(createDatabase);
-		}
-	
-		public static void createExternalTable() throws ErrorSummary
+	public static void createExternalTable() throws ErrorSummary
 		{
 			writeAsSeq();
 			String createExtTable = "CREATE EXTERNAL TABLE FINSKUL.SEQ_WHITEGOODS"+

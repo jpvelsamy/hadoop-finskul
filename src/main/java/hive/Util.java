@@ -87,6 +87,13 @@ public class Util {
 			}
 			return conn;
 		}
+
+
+	public static void createDatabase() throws ErrorSummary
+	{
+		String createDatabase = "CREATE DATABASE FINSKUL";
+		executeStatement(createDatabase);
+	}
 	
 	
 

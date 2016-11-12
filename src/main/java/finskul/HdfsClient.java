@@ -92,6 +92,12 @@ public class HdfsClient {
 		writeFile(folderPath, fileName);
 	}
 	
+	public static void writeTotalGoodsCsv(String folderPath) throws ErrorSummary
+	{
+		String fileName = "totaldata.csv";
+		writeFile(folderPath, fileName);
+	}
+	
 	public static void writeFile(String destPath, String fileName) throws ErrorSummary {
 		FileSystem fileSystem = getFS();		
 		Path path = new Path(destPath);
