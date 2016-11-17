@@ -22,6 +22,8 @@ public class BasicTest {
 		try {
 			Util.getConnection();
 		} catch (ErrorSummary e) {
+			e.printStackTrace();
+			
 			fail(ErrorSummary.stackTrace(e));
 		}
 	}
