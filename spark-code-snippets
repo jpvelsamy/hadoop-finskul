@@ -1,0 +1,82 @@
+COMMAND HISTORY FOR YOUR REFERENCE
+LINE COUNT - SIMPLE - SELECT COUNT(*) FROM A SINGLE FILE
+
+val amazon= sc.textFile("./sourcefile/curation.final.amazon.txt")
+amazon.first
+amazon.count
+
+val fk = sc.textFile("./sourcefile/curation.final.fk.txt")
+fk.count
+------------------------------------------------------------ line count for a single file end---------------------------------------------
+LINE COUNT ALL FILES IN ONE GO - SELECT COUNT(*) FROM ALL FILES 
+
+val allFiles = sc.wholeTextFiles("./sourcefile")
+val lineCountPerFile = allFiles.map(tuple=>{
+val fileName = tuple._1
+val content = tuple._2
+val length = content.split("[\r\n]+").length
+(fileName, length)})
+
+lineCountPerFile.count
+lineCountPerFile.collect
+------------------------------------------------------------ line count for all  files end---------------------------------------------
+LINE COUNT OF LINES CONTAINING "android" TEXT - SELECT COUNT(*) WITH A FILTER CRITERIA
+
+val androidLineCount = allFiles.map(tuple=>{
+val fileName = tuple._1
+val content = tuple._2
+val contentArr = content.split("[\r\n]+")
+val androidLines = contentArr.filter(line=>line.toLowerCase.contains("android"))
+val lineCount = androidLines.length
+(fileName,lineCount)
+})
+androidLineCount.count
+androidLineCount.collect
+------------------------------------------------------------ line count for all  android lines end---------------------------------------------
+LINES CONTAINING "android" TEXT - SELECT * WITH A FILTER CRITERIA
+NOTE - WHEN YOU COPY PAST, DO NOT LEAVE SPACE AT THE LEFT, REPL GETS OVERWORKED
+
+val androidLine = allFiles.map(tuple=>{
+val fileName = tuple._1
+val content = tuple._2
+val contentArr = content.split("[\r\n]+")
+val androidLines = contentArr.filter(line=>line.toLowerCase.contains("android"))
+(fileName,androidLines.mkString.trim)
+})
+androidLine.saveAsTextFile("./android-lines")
+
+IF YOU WANT YOU CAN EVEN SEND IT FLATTENED
+------------------------------------------------------------ android lines all  files end---------------------------------------------
+ANDROID WORDS ALONE  - SELECT * WITH TWO FILTER CRITERIA - OF COURSE ITS INTERMEDIATE
+
+val androidWordsAlone = androidLine.map(tuple=>{
+val fileName = tuple._1
+val content = tuple._2
+val contentArr = content.split(" ")
+val androidWordsArr = contentArr.filter(word=>word.toLowerCase.contains("android"))
+(fileName, androidWordsArr.mkString.trim)
+})
+androidWordsAlone.first
+androidWordsAlone.collect
+ 
+ BUT IF YOU WANT TO OPERATE ON FINDING OUT THE COUNT, THEN YOU CAN'T FLATTEN IT LIKE THIS
+ ------------------------------------------------------------ android lines all  files concatenated end---------------------------------------------
+ MAP REDUCE - SELECT  word, count(word) from all files group by word
+ 
+val androidWordsAlone = androidLine.map(tuple=>{
+val fileName = tuple._1
+val content = tuple._2
+val contentArr = content.split(" ")
+val androidWordsArr = contentArr.filter(word=>word.toLowerCase.contains("android"))
+(fileName, androidWordsArr)
+})
+androidWordsAlone.first
+val flattenedData = androidWordsAlone.flatMap(tuple=>tuple._2)
+flattenedData.first
+val output = wordCount.reduceByKey((a,b)=>a+b)
+output.collect
+
+ ------------------------------------------------------------ android word count---------------------------------------------
+
+ 
+ 
